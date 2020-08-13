@@ -8,9 +8,10 @@ function App() {
   return (
     <section className="App">
       <header className="App-header">
-      <Navbar/>
+        <Navbar/>
       </header>
       <div>
+        <CharacterSection/>
         <QuestionSection/>
       </div>
     </section>

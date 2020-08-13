@@ -1,0 +1,2 @@
+class PowersetsController < ApplicationController
+end

@@ -10,20 +10,26 @@ class App extends Component{
     super()
     this.state = {
       question_array:[],
-      loading:true
+      loading:true,
+      characters: []
     } 
   }
   
   async componentDidMount(){
-    const URL = "https://opentdb.com/api.php?amount=50&type=multiple"
-    const response = await fetch(URL)
-    const data = await response.json()
+    const TRIVIAURL = "https://opentdb.com/api.php?amount=50&type=multiple"
+    const CHARURL = "http://localhost:3000/characters"
+    const tresponse = await fetch(TRIVIAURL)
+    const tdata = await tresponse.json()
+    const cresponse = await fetch(CHARURL)
+    const cdata = await cresponse.json()
+
     this.setState({
-      question_array: data.results,
+      question_array: tdata.results,
+      characters: cdata,
       loading: false
       })
   }
-  
+
 
     render(){
         return (
@@ -35,7 +41,7 @@ class App extends Component{
               <Navbar/>
             </header>
             <div>
-              <CharacterSection/>
+              <CharacterSection characters={this.state.characters}/>
               <QuestionSection question_array={this.state.question_array}/>
             </div>
             </>

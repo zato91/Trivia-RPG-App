@@ -20,7 +20,7 @@ function QuestionSection (props) {
 
      return (
          <div>
-        <Question question={question} answers={getAnswers()}/>
+        <Question question={question} answers={getAnswers()} correct_answer={question.correct_answer} getQuestion={getQuestion}/>
         <button className="ui button" onClick={getQuestion}>Next Question</button>
         </div>
     )

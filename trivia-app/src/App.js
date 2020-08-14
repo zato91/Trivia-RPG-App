@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import 'semantic-ui-css/semantic.min.css';
+// import 'semantic-ui-css/semantic.min.css';
 import Navbar from './components/Navbar.js';
 import QuestionSection from './components/QuestionSection.js';
 import CharacterSection from './components/CharacterSection.js';

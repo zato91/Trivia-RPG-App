@@ -1,19 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Question from '../components/Question.js';
 
-const URL = "https://opentdb.com/api.php?amount=10"
+function QuestionSection (props) { 
+    const [question, setQuestion] = useState(props.question_array[0])
+    const [count, setCount] = useState(1)
 
-class QuestionSection extends React.Component{
-
-    render (){
-
-        return (
-            <div className="question-section">
-            This is the question area
-            <Question/>
-            </div>
-        )
+    function getQuestion(){
+        setCount(count+1)
+        setQuestion(props.question_array[count])
+        getAnswers()
     }
+    function getAnswers(){
+        if (question){
+            let answers = question.incorrect_answers
+            answers.push(question.correct_answer)
+            return answers
+        }
+    }
+
+     return (
+         <div>
+        <Question question={question} answers={getAnswers()}/>
+        <button className="ui button" onClick={getQuestion}>Next Question</button>
+        </div>
+    )
+
 }
   
   export default QuestionSection;

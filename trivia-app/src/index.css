@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/*****************************.character-section ************************/
+
+
+#character-img{
+  width: 200px;
+  height: 100px;
+  border: 1px solid blue;
+  background-color: blue;
+  margin-bottom: 50px;
+}
+
+.stats{
+  width: 200px;
+  height: 100px;
+  border: 1px solid blue;
+} 

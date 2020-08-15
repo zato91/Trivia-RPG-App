@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-// import 'semantic-ui-css/semantic.min.css';
+import 'semantic-ui-css/semantic.min.css';
 import Navbar from './components/Navbar.js';
 import QuestionSection from './components/QuestionSection.js';
 import CharacterSection from './components/CharacterSection.js';
+import BattleSection from './components/BattleSection.js';
 
 class App extends Component{
   constructor(){
@@ -11,7 +12,8 @@ class App extends Component{
     this.state = {
       question_array:[],
       loading:true,
-      characters: []
+      characters: [],
+      selected_character: ""
     } 
   }
   
@@ -26,7 +28,7 @@ class App extends Component{
     this.setState({
       question_array: tdata.results,
       characters: cdata,
-      loading: false
+      loading: false,
       })
   }
 
@@ -43,6 +45,7 @@ class App extends Component{
             <div>
               <CharacterSection characters={this.state.characters}/>
               <QuestionSection question_array={this.state.question_array}/>
+              <BattleSection/>
             </div>
             </>
           }

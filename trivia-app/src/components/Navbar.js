@@ -1,14 +1,16 @@
 import React from 'react';
-import SignUp from './SignUp'
-import Login from './Login';
-
+import SignUpModal from './SignUpModal'
+import LoginModal from './LoginModal';
+import {Image} from 'semantic-ui-react'
 
 function Navbar() {
     return (
-      <div className="Navbar">
-          <SignUp /> 
-          <Login />
-      </div>
+      <section className="navbar">
+        <Image src='./images/title_icon.png' height='32px' className="title-image"/>
+        <h1 className="app-title">Trivia RPG</h1>
+        <SignUpModal /> 
+        <LoginModal />
+      </section>
     );
   }
   

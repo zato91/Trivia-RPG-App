@@ -6,7 +6,7 @@ function Question(props) {
   const [modal,setModal] = useState(false)
   let correct_answer = props.correct_answer
   return (
-      <div className="Question">
+      <div className="question">
         {props.question ?
         <div>
           <div>

@@ -15,6 +15,17 @@ class UsersController < ApplicationController
             render json: {error: "Failed to create the user"}
         end
     end
+
+    def login
+        byebug
+        user = User.find_by(username: params[:username])
+    
+            if user && user.authenticate(params[:password])
+                render json: {user: UserSerializer.new(user), token: encode_token({user_id: user.id})}
+            else
+                render json: {error: "Invalid username or Password"}
+            end
+       end 
     
 
     private

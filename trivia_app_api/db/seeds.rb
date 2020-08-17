@@ -5,6 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Character.destroy_all
+Power.destroy_all
+Powerset.destroy_all
 
 Character.create(name:"Axel",bio:"Fighting Style: Balanced",tagline:"Come back when you've learned how to fight!",max_hp:15,armor:10,energy:2, img_url:"./images/Chars/Axel_Avatar.png")
 Character.create(name:"Blaze",bio:"Fighting Style: Finesse",tagline:"I hope I didn't hurt your ego too badly... Oops!",max_hp:10,armor:10,energy:3, img_url: "./images/Chars/Blaze_Avatar.png")

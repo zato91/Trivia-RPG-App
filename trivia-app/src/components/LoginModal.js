@@ -29,9 +29,8 @@ class LoginModal extends Component{
       .then(res => res.json())
       .then(data => { 
          localStorage.token = data.token
-        //  localStorage.username= data.user.username
-         console.log(data)
-         this.props.getCharacters(e);
+         if (!data.error){
+           this.props.getCharacters(e);}
       })
     }
    

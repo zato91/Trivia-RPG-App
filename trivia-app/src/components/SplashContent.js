@@ -1,9 +1,7 @@
 import React from 'react'
-import { Image, Item } from 'semantic-ui-react'
+import { Item } from 'semantic-ui-react'
 
-const paragraph = <Image src='/images/wireframe/short-paragraph.png' />
-
-const ItemExampleLink = () => (
+const SplashContent = () => (
   <Item.Group>
     <br></br>
     <Item>
@@ -35,4 +33,4 @@ const ItemExampleLink = () => (
   </Item.Group>
 )
 
-export default ItemExampleLink
+export default SplashContent

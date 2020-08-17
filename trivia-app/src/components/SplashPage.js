@@ -11,8 +11,6 @@ function SplashPage() {
         <div className="splash-content">
             <SplashContent/>
         </div>
-
-
     </div>
 
     )

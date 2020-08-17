@@ -38,7 +38,7 @@ class SignUp extends Component{
           <Modal.Header>Login</Modal.Header>
           <Modal.Content>
           <div>
-              <h2>Signup</h2>
+              <h2>Login</h2>
               <form onSubmit={(e) => this.signUp(e)}>
               <label>UserName</label>
               <input onChange={(e) => this.handleChange(e)} name="username" type="text" />

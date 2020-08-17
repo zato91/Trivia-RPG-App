@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+    skip_before_action :logged_in?, only: [:create, :login] 
     
     def index
         users = User.all
@@ -17,14 +18,18 @@ class UsersController < ApplicationController
     end
 
     def login
-        byebug
-        user = User.find_by(username: params[:username])
+        
+        user = User.find_by(username: params[:user][:username])
+        
     
-            if user && user.authenticate(params[:password])
+            if user && user.authenticate(params[:user][:password])
+                
                 render json: {user: UserSerializer.new(user), token: encode_token({user_id: user.id})}
             else
                 render json: {error: "Invalid username or Password"}
             end
+
+            
        end 
     
 

@@ -4,6 +4,10 @@ import { Modal } from 'semantic-ui-react'
 
 class SignUp extends Component{
 
+  state = {
+    open: false,
+  }
+
     handleChange = (e) => {
       this.setState({
         [e.target.name]: e.target.value
@@ -26,6 +30,7 @@ class SignUp extends Component{
       .then(data => { 
          localStorage.token = data.token
          console.log(data)
+         this.props.getCharacters(e);
       })
     }
    
@@ -34,12 +39,20 @@ class SignUp extends Component{
       return(
         <Modal
         trigger = {<button className= "ui teal button">SignUp</button>}
+        open= {this.state.open}
+        onOpen = { ()=> { this.setState({
+          open: true
+        })}}
         >
           <Modal.Header>This is signup</Modal.Header>
           <Modal.Content>
           <div>
               <h2>Signup</h2>
-              <form onSubmit={(e) => this.signUp(e)}>
+              <form onSubmit={(e) => {
+              this.signUp(e)
+              this.setState({ open: false})}
+            }
+          >
               <label>UserName</label>
               <input onChange={(e) => this.handleChange(e)} name="username" type="text" />
               <label>Password</label>

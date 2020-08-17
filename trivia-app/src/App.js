@@ -8,6 +8,7 @@ import BattleSection from './components/BattleSection.js';
 import CharSelect from './components/CharSelect';
 import BossScreen from './components/BossScreen';
 import SplashPage from './components/SplashPage';
+import { fromBearer } from '@bearer/react'
 
 const enemies = ["./images/Enemies/Banger_One.png","./images/Enemies/Banger_Two.png","./images/Enemies/Banger_Three.png","./images/Enemies/Cop_One.png","./images/Enemies/Cop_Two.png","./images/Enemies/Cop_Three.png","./images/Enemies/Hawk_One.png","./images/Enemies/Hawk_Three.png","./images/Enemies/Thug_One.png","./images/Enemies/Thug_Two.png","./images/Enemies/Thug_Three.png",]
 
@@ -29,20 +30,42 @@ class App extends Component{
     } 
   }
   
-  async componentDidMount(){
-    const TRIVIAURL = "https://opentdb.com/api.php?amount=50&type=multiple"
-    const CHARURL = "http://localhost:3000/characters"
-    const tresponse = await fetch(TRIVIAURL)
-    const tdata = await tresponse.json()
-    const cresponse = await fetch(CHARURL)
-    const cdata = await cresponse.json()
+  // async componentDidMount(){
+  //   const TRIVIAURL = "https://opentdb.com/api.php?amount=50&type=multiple"
+  //   const CHARURL = "http://localhost:3000/characters"
+  //   const tresponse = await fetch(TRIVIAURL)
+  //   const tdata = await tresponse.json()
+  //   const cresponse = await fetch(CHARURL)
+  //   const cdata = await cresponse.json()
 
-    this.setState({
-      question_array: tdata.results,
-      characters: cdata,
-      loading: false,
-      })
-    }
+  //   this.setState({
+  //     question_array: tdata.results,
+  //     characters: cdata,
+  //     loading: false,
+  //     })
+  //   }
+
+
+  getCharacters = (e) => {
+    e.preventDefault();
+    
+    fetch("http://localhost:3000/characters",{
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${localStorage.token}` // send token back to server
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+        this.setState({
+          // question_array: tdata.results,
+          characters: data,
+          loading: false,
+        })
+        console.log("hello")
+    })
+   
+}
     
     setEnemy=()=>{
       let count = Math.floor(Math.random() * enemies.length)
@@ -79,7 +102,8 @@ class App extends Component{
       return (
         <section className="App">
             <header className="App-header">
-              <Navbar/>
+              <Navbar
+              getCharacters={this.getCharacters}/> 
             </header>
           {this.state.loading 
           ?<div>loading</div>

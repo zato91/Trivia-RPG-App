@@ -7,6 +7,7 @@ import CharacterSection from './components/CharacterSection.js';
 import BattleSection from './components/BattleSection.js';
 import CharSelect from './components/CharSelect';
 import BossScreen from './components/BossScreen';
+import SplashPage from './components/SplashPage';
 
 const enemies = ["./images/Enemies/Banger_One.png","./images/Enemies/Banger_Two.png","./images/Enemies/Banger_Three.png","./images/Enemies/Cop_One.png","./images/Enemies/Cop_Two.png","./images/Enemies/Cop_Three.png","./images/Enemies/Hawk_One.png","./images/Enemies/Hawk_Three.png","./images/Enemies/Thug_One.png","./images/Enemies/Thug_Two.png","./images/Enemies/Thug_Three.png",]
 
@@ -23,7 +24,8 @@ class App extends Component{
       selected_character: "",
       current_health: "",
       wrongAnswers: 0,
-      reachedBoss: false
+      reachedBoss: false,
+      loggedin: false
     } 
   }
   
@@ -81,24 +83,30 @@ class App extends Component{
             </header>
           {this.state.loading 
           ?<div>loading</div>
-          :<>
-            <div>
-              {this.state.newGame ?
+          :<> {this.state.loggedin
+              ?
+              <>
                 <div>
-                  <img id='background-image' src='./images/Trivia_Fighter.png'/>
-                  <CharSelect characters={this.state.characters} startGame={this.startGame}/>
+                  {this.state.newGame ?
+                    <div>
+                      <img id='background-image' src='./images/Trivia_Fighter.png'/>
+                      <CharSelect characters={this.state.characters} startGame={this.startGame}/>
+                    </div>
+                  :<>
+                    <img id='background-image' src='./images/Trivia_Fighter.png'/>
+                    <CharacterSection character={this.state.selected_character} current_health={this.state.current_health}/>
+                    <QuestionSection question_array={this.state.question_array} setEnemy={this.setEnemy} setQCount={this.setQCount} setWrongAnswers={this.setWrongAnswers}/>
+                    <BattleSection enemy={enemies[this.state.eCount]} qCount={this.state.qCount}/>
+                    {/* {this.state.reachedBoss ? <BossScreen/> : null} */}
+                  </>
+                  }
                 </div>
-              :<>
-                <img id='background-image' src='./images/Trivia_Fighter.png'/>
-                <CharacterSection character={this.state.selected_character} current_health={this.state.current_health}/>
-                <QuestionSection question_array={this.state.question_array} setEnemy={this.setEnemy} setQCount={this.setQCount} setWrongAnswers={this.setWrongAnswers}/>
-                <BattleSection enemy={enemies[this.state.eCount]} qCount={this.state.qCount}/>
-              </>
-              }
-            </div>
-            {this.state.reachedBoss ? <BossScreen/> : null}
-            </>
-
+              </>:
+                <div>
+                <SplashPage/><button onClick={(e)=>this.setState({loggedin: true})}>login</button>
+               </div>
+            }
+          </>
           }
         </section>
         );

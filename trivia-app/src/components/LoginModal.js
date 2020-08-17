@@ -2,7 +2,7 @@ import React, {Component, useState} from 'react'
 import { Modal } from 'semantic-ui-react'
  
 
-class SignUp extends Component{
+class Login extends Component{
 
     handleChange = (e) => {
       this.setState({
@@ -53,4 +53,4 @@ class SignUp extends Component{
     }
 }
 
-export default SignUp
+export default Login

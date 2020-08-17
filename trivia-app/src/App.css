@@ -1,29 +1,65 @@
-.App {
-  text-align: center;
+.App{
+  overflow: hidden;
+  background: aliceblue;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.game{
+  overflow: hidden;
+}
+.boss-button{
+  position: relative;
+}
+.char-select{
+  position: absolute;
+  margin-left: 25%;
+  margin-top: 10px;
 }
 .app-title{
   float: left;
   position: relative;
-  left: 20px;
   bottom: 23px;
+  font-style: italic;
+  font-weight: bold;
 }
 .navbar{
   background-color: aqua;
   margin-bottom: 10px;
+  text-indent: 30px;
+  min-height: 40px;
+}
+.signup-buttons{
+  font-weight: bolder;
+  position: relative;
+  top: 2px;
 }
 .title-image{
   float: left;
   position: relative;
   left: 5px;
+  top: 2px;
   align-self: center;
 }
 .character-section{
   float: left;
   position: relative;
-  right: 110px;
+  right: 180px;
+  max-width: 20%;
 }
 .question-section{
   float: left;
+  position: relative;
+  text-align: center;
+  min-width: 33%;
+  max-width: 33%;
+  left: 0%;
+}
+.battle-section{
+  position: relative;
+  float: right;
+  max-width: 20%;
+  min-width: 20%;
+  right: 10px;
 }
 .character-img{
   width: 200px;
@@ -31,12 +67,12 @@
   border: 1px solid blue;
   background-color: blue;
   margin-bottom: 50px;
+  background-blend-mode: multiply;
 }
 .character-img img{
   position: relative;
   top: 15px;
 }
-
 .stats{
   width: 200px;
   height: 100px;

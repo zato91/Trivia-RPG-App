@@ -29,7 +29,7 @@ function LoginModal() {
 
     return(
       <Modal
-       trigger = {<button className="ui button">Login</button>}
+       trigger = {<button className="ui teal button">Login</button>}
       >
       <Modal.Header>This is login</Modal.Header>
       <Modal.Content>

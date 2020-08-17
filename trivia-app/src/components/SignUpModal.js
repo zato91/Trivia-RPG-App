@@ -30,7 +30,7 @@ function SignUpModal () {
 
     return(
       <Modal
-      trigger = {<button className= "ui button">SignUp</button>}
+      trigger = {<button className= "ui teal button">SignUp</button>}
       >
         <Modal.Header>This is signup</Modal.Header>
         <Modal.Content>

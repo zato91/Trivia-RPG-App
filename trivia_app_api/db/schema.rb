@@ -14,16 +14,19 @@ ActiveRecord::Schema.define(version: 2020_08_14_150025) do
 
   create_table "characters", force: :cascade do |t|
     t.string "name"
+    t.string "bio"
+    t.text "tagline"
+    t.string "img_url"
     t.integer "max_hp"
     t.integer "armor"
-    t.text "img_url"
+    t.integer "energy"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "powers", force: :cascade do |t|
     t.string "name"
-    t.integer "mana_cost"
+    t.integer "effect"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

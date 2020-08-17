@@ -9,6 +9,8 @@ function QuestionSection (props) {
         setCount(count+1)
         setQuestion(props.question_array[count])
         getAnswers()
+        props.setEnemy()
+        props.setQCount()
     }
     function getAnswers(){
         if (question){
@@ -20,8 +22,7 @@ function QuestionSection (props) {
 
      return (
          <div className="question-section">
-        <Question question={question} answers={getAnswers()} correct_answer={question.correct_answer} getQuestion={getQuestion}/>
-        <button className="ui button" onClick={getQuestion}>Next Question</button>
+        <Question question={question} answers={getAnswers()} correct_answer={question.correct_answer} getQuestion={getQuestion} setWrongAnswers={props.setWrongAnswers}/>
         </div>
     )
 

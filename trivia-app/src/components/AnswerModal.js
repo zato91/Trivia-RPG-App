@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Modal, Header, Image } from 'semantic-ui-react'
+import { Button, Modal, Image } from 'semantic-ui-react'
 
 function AnswerModel(props) {
     const [open, setOpen] = React.useState(false)
@@ -10,13 +10,10 @@ function AnswerModel(props) {
     let message = "You took damage! If you have parry available you may select parry to prevent damage."
     if(!damage){
         header = "Correct"
-    }
-    if(!damage){
         message = "You dodged the blow! Now counter attack!"
-    }
-    if(!damage){
         image = '/images/dodge.png'
     }
+    
   return (
     <Modal
       onClose={() => {
@@ -55,6 +52,7 @@ function AnswerModel(props) {
           onClick={() => {
               setOpen(false)
               props.getQuestion()
+              props.setWrongAnswers()
           }}
           positive
         />

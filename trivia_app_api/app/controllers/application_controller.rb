@@ -6,11 +6,13 @@ class ApplicationController < ActionController::API
     end
 
     def logged_in?
+        
         headers = request.headers["Authorization"]
         token = headers.split(" ")[1]
 
+
         begin
-            user_id = JWT.decode(token, "DC060120", "HS256")[0]["user_id"]
+            user_id = JWT.decode(token, "triviaRPG", "HS256")[0]["user_id"]
             user = User.find(user_id)
         rescue 
             user = nil

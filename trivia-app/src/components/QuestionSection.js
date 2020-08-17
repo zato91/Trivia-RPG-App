@@ -4,24 +4,33 @@ import Question from '../components/Question.js';
 function QuestionSection (props) { 
     const [question, setQuestion] = useState(props.question_array[0])
     const [count, setCount] = useState(1)
+    const [answers, setAnswers] = useState([])
 
     function getQuestion(){
         setCount(count+1)
         setQuestion(props.question_array[count])
-        getAnswers()
         props.setEnemy()
         props.setQCount()
     }
     function getAnswers(){
-        if (question){
-            let answers = question.incorrect_answers
-            answers.push(question.correct_answer)
-            return answers
-        }
-    }
 
-     return (
-         <div className="question-section">
+            let answers = question.incorrect_answers
+            answers.push(question.correct_answer) 
+            console.log(answers)
+            // for (var i = answers.length - 1; i > 0; i--) {
+            //     var j = Math.floor(Math.random() * (i + 1));
+            //     var temp = answers[i];
+            //     answers[i] = answers[j];
+            //     answers[j] = temp;
+            // }
+            return answers
+             
+    }
+    
+    
+    return (
+        <div className="question-section">
+        {getAnswers()}
         <Question question={question} answers={getAnswers()} correct_answer={question.correct_answer} getQuestion={getQuestion} setWrongAnswers={props.setWrongAnswers}/>
         </div>
     )

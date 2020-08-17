@@ -5,10 +5,6 @@ function CharacterSection (props){
     let character = props.character
     let CurrentHealth = props.current_health
     const [CurrentEnergy, setCurrentEnergy] = useState(character.energy)
-    if (CurrentHealth === 0){
-        alert('Game Over Man!')
-    }
-
 
     return (
         <div className="character-section">
@@ -24,7 +20,7 @@ function CharacterSection (props){
                 </Card.Content>
                 <Card.Content>
                     {character.powers.map(power=>{
-                        return power.name 
+                        return <>{power.name} <br></br> </>
                     })}
                 </Card.Content>
                 <Card.Content>

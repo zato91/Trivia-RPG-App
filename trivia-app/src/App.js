@@ -10,6 +10,7 @@ import SplashPage from './components/SplashPage';
 import DeathScreen from './components/DeathScreen.js';
 import BossScreen from './components/BossScreen';
 
+
 const enemies = ["./images/Enemies/Banger_One.png","./images/Enemies/Banger_Two.png","./images/Enemies/Banger_Three.png","./images/Enemies/Cop_One.png","./images/Enemies/Cop_Two.png","./images/Enemies/Cop_Three.png","./images/Enemies/Hawk_One.png","./images/Enemies/Hawk_Three.png","./images/Enemies/Thug_One.png","./images/Enemies/Thug_Two.png","./images/Enemies/Thug_Three.png",]
 const TRIVIAURL = "https://opentdb.com/api.php?amount=50&type=multiple"
 const CHARURL = "http://localhost:3000/characters"
@@ -28,7 +29,9 @@ class App extends Component{
       current_health: "",
       wrongAnswers: 0,
       reachedBoss: false,
-      loggedin: false
+      loggedin: false,
+      displayabout:false,
+      displayplay :false
     } 
   }
 
@@ -92,6 +95,21 @@ class App extends Component{
       })
     }
 
+
+    displayAbout=()=>{
+      
+      this.setState({
+        displayabout: !this.state.displayabout,
+        displayplay : false
+    })
+    }
+
+    displayPlay=()=>{
+      
+      this.setState({
+        displayplay : !this.state.displayplay
+    })
+    }
     render(){
       return (
         <section className="App">
@@ -101,7 +119,13 @@ class App extends Component{
             </header>
 
           {this.state.loading 
-          ?<SplashPage/>
+          ?<SplashPage 
+          displayAbout={this.displayAbout} 
+          displayPlay={this.displayPlay}
+          displayabout={this.state.displayabout}
+          displayplay={this.state.displayplay}
+           />
+          
           :<> {this.state.loggedin
               ?
               <>{this.getQuestions()}
@@ -130,6 +154,7 @@ class App extends Component{
             }
           </>
           }
+          
         </section>
         );
       }

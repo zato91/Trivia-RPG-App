@@ -1,7 +1,7 @@
 import React from 'react'
 import { Item } from 'semantic-ui-react'
 
-const SplashContent = () => (
+const SplashContent = (props) => (
   <Item.Group>
     <br></br>
     <Item>
@@ -13,7 +13,12 @@ const SplashContent = () => (
       </Item.Content>
     </Item>
     <br></br>
-    <Item>
+    <Item 
+    // onClick={()=>props.displayAbout()  props.displayPlay()} 
+    onClick={() => {
+      props.displayAbout();
+      props.displayPlay();
+    }}>
       <Item.Image size='small' src='/images/Splash_Image_Two.png' />
 
       <Item.Content>
@@ -22,9 +27,9 @@ const SplashContent = () => (
       </Item.Content>
     </Item>
     <br></br>
-    <Item>
+    <Item onClick={()=>props.displayAbout()}>
       <Item.Image size='small' src='/images/Splash_Image_Three.png' />
-      <Item.Content>
+      <Item.Content >
         <Item.Header>About the Developers</Item.Header>
             <Item.Description className="splash-content-description">Just two cool guys with mad coding skills built this app. Visit our about page to find out more about them, app updates, and to find contact information!</Item.Description>
         </Item.Content>

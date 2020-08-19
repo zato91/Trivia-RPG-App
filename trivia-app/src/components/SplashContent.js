@@ -1,10 +1,30 @@
 import React from 'react'
 import { Item } from 'semantic-ui-react'
 
-const SplashContent = (props) => (
+
+
+
+const SplashContent = (props) => {
+  
+  let handlegame =()=>{
+    props.history.push("/about/game")
+  }
+
+  let handleplay =()=>{
+    props.history.push('/about/play')
+  }
+
+  let handledev =()=>{
+    props.history.push("/about/dev")
+
+  }
+
+
+  return (
+  
   <Item.Group>
     <br></br>
-    <Item>
+    <Item onClick={() =>  handlegame()}>
       <Item.Image size='small' src='/images/Splash_Image_One.png' />
 
       <Item.Content>
@@ -13,12 +33,7 @@ const SplashContent = (props) => (
       </Item.Content>
     </Item>
     <br></br>
-    <Item 
-    // onClick={()=>props.displayAbout()  props.displayPlay()} 
-    onClick={() => {
-      props.displayAbout();
-      props.displayPlay();
-    }}>
+    <Item onClick={() =>  handleplay()}>
       <Item.Image size='small' src='/images/Splash_Image_Two.png' />
 
       <Item.Content>
@@ -27,7 +42,7 @@ const SplashContent = (props) => (
       </Item.Content>
     </Item>
     <br></br>
-    <Item onClick={()=>props.displayAbout()}>
+    <Item onClick={()=> handledev()}>
       <Item.Image size='small' src='/images/Splash_Image_Three.png' />
       <Item.Content >
         <Item.Header>About the Developers</Item.Header>
@@ -36,6 +51,8 @@ const SplashContent = (props) => (
     </Item>
     <br></br>
   </Item.Group>
-)
+  
+  )
+}
 
 export default SplashContent

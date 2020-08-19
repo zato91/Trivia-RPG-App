@@ -8,7 +8,7 @@ import BattleSection from './components/BattleSection.js';
 import CharSelect from './components/CharSelect';
 import SplashPage from './components/SplashPage';
 import DeathScreen from './components/DeathScreen.js';
-
+import {BrowserRouter, Route} from 'react-router-dom';
 
 
 const enemies = ["./images/Enemies/Banger_One.png","./images/Enemies/Banger_Two.png","./images/Enemies/Banger_Three.png","./images/Enemies/Cop_One.png","./images/Enemies/Cop_Two.png","./images/Enemies/Cop_Three.png","./images/Enemies/Hawk_One.png","./images/Enemies/Hawk_Three.png","./images/Enemies/Thug_One.png","./images/Enemies/Thug_Two.png","./images/Enemies/Thug_Three.png",]
@@ -37,8 +37,6 @@ class App extends Component{
       reachedBoss: false,
       bossNumber:0,
       loggedin: false,
-      displayabout:false,
-      displayplay :false,
       cheat: false
     } 
   }
@@ -49,7 +47,7 @@ class App extends Component{
     fetch(CHARURL,{
       method: "GET",
       headers: {
-        Authorization: `Bearer ${localStorage.token}` // send token back to server
+        Authorization: `Bearer ${localStorage.token}` 
       }
     })
     .then(res => res.json())
@@ -62,6 +60,24 @@ class App extends Component{
     })
 }
 
+
+reRender = () => {
+  fetch(CHARURL,{
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.token}` 
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+      this.setState({
+        characters: data,
+        loading: false,
+        loggedin: true
+      })
+  })
+}
+
   componentDidMount() {
     fetch(TRIVIAURL)
     .then(res => res.json())
@@ -69,6 +85,9 @@ class App extends Component{
         this.setState({
           question_array: data.results,
         })
+        if(localStorage.token){
+          this.reRender()
+        }
     })
 }
   setCheat=()=>{
@@ -205,32 +224,24 @@ class App extends Component{
       })
     }
 
-    displayAbout=()=>{
-      
-      this.setState({
-        displayabout: !this.state.displayabout,
-        displayplay : false
-    })
+     startNewGame = () => {
+     
+       window.location.href = '/'; 
     }
 
-    displayPlay=()=>{
-      this.setState({
-        displayplay : !this.state.displayplay
-    })
-    }
+    
     render(){
       return (
+        <BrowserRouter >
         <section className="App">
             <header className="App-header">
-              <Navbar getCharacters={this.getCharacters} setCheat={this.setCheat}/> 
+            <Route path="/" render={routerProps => <Navbar getCharacters={this.getCharacters} setCheat={this.setCheat} 
+            startNewGame={this.startNewGame} 
+            {...routerProps}  /> }/> 
             </header>
-
+           
           {this.state.loading 
-          ?<SplashPage 
-          displayAbout={this.displayAbout} 
-          displayPlay={this.displayPlay}
-          displayabout={this.state.displayabout}
-          displayplay={this.state.displayplay}
+          ?<SplashPage
            />
 
           :<> {this.state.loggedin
@@ -262,13 +273,14 @@ class App extends Component{
                 </div>
               </>:
                 <div>
-                <SplashPage/>
+                
                </div>
             }
           </>
           }
-          
+          {/* <SplashPage/> */}
         </section>
+        </BrowserRouter >
         );
       }
 }

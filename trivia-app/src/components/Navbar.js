@@ -8,16 +8,19 @@ function Navbar(props) {
   let logout = () => {
     localStorage.clear();
     window.location.href = '/';
-}
+  }
+
+  
+
+
 
 let buttonDisplay = () =>{
   if (!localStorage.token){
     return <> <SignUpModal getCharacters={props.getCharacters}/> <LoginModal getCharacters={props.getCharacters}/> </>
   }else {
-    return<> 
-    <button onClick={logout} class="ui button" id="logout">Logout</button>
-    <button className="ui basic teal button" onClick={()=>props.setCheat()}>cheat</button>
-    </>
+    return <><button onClick={logout} class="ui button" id="logout">Logout</button> 
+    <button onClick={props.startNewGame} class="ui button" id="logout">Start New Game</button>
+    <button onClick={()=>{props.setCheat()}} className="ui basic teal button">Cheat</button></>
   }
 }
     return (

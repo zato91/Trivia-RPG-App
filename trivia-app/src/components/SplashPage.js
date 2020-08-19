@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Button, Modal } from 'semantic-ui-react'
-import SplashContent from './SplashContent'
+import { Button, Modal } from 'semantic-ui-react';
+import SplashContent from './SplashContent';
 import About from './About';
+import {Route} from 'react-router-dom';
 
 
 
@@ -12,7 +13,8 @@ function SplashPage(props) {
         <img id='splash-image' src='./images/Trivia_Fighter.png'/>
         <div className="splash-content">
             
-            {props.displayabout? <About displayAbout={props.displayAbout} displayPlay={props.displayPlay}/>: <SplashContent   displayAbout={props.displayAbout} displayPlay={props.displayPlay}/>}
+        <Route exact path="/" render={(routeProps)=> <SplashContent {...routeProps}/>}/>
+        <Route path="/about" component={About}/>
         </div>
     </div>
 

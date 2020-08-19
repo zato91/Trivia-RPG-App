@@ -23,11 +23,16 @@ class App extends Component{
       loading:true,
       newGame: true,
       eCount: 0,
-      qCount: 1,
+      qCount: 0,
       characters: [],
       selected_character: "",
       current_health: "",
+      current_energy:"",
+      current_medkits: 1,
+      current_energy_potions: 1,
       wrongAnswers: 0,
+      fifty_fifty: false,
+      answer_reveal: false,
       reachedBoss: false,
       loggedin: false,
       displayabout:false,
@@ -54,7 +59,7 @@ class App extends Component{
     })
 }
 
-  getQuestions = () => {
+  componentDidMount() {
     fetch(TRIVIAURL)
     .then(res => res.json())
     .then(data => {
@@ -84,6 +89,7 @@ class App extends Component{
         newGame: newGame,
         selected_character: character,
         current_health: character.max_hp,
+        current_energy: character.energy,
       })
     }
 
@@ -95,6 +101,58 @@ class App extends Component{
       })
     }
 
+    setFiftyFifty=(ability)=>{
+      let fifty_fifty = !this.state.fifty_fifty
+      if(this.state.current_energy>0){
+        this.setState({
+          fifty_fifty: fifty_fifty,
+        })
+      }
+      if (ability === true) this.setEnergy(-1)
+    }
+
+    setAnswerReveal=(ability)=>{
+      let answer_reveal = !this.state.answer_reveal
+      if(this.state.current_energy > 2){
+        this.setState({
+          answer_reveal: answer_reveal
+        })
+      }
+      if (ability === true) this.setEnergy(-2)
+    }
+
+    useMedKit=()=>{
+      if(this.state.current_medkits > 0){
+        let healthGain = Math.floor(this.state.selected_character.max_hp / 2)
+        let newHealth = this.state.current_health + healthGain
+        if(newHealth > this.state.selected_character.max_hp){
+          newHealth = this.state.selected_character.max_hp
+        }
+        this.setState({
+          current_health: newHealth,
+          current_medkits: this.state.current_medkits - 1
+        })
+      }
+    }
+
+    useEnergyPotion=()=>{
+      if(this.state.current_energy_potions > 0){
+        let newEnergy = this.state.current_energy + 1
+        if(newEnergy > this.state.selected_character.energy){
+          newEnergy = this.state.selected_character.energy
+        }
+        this.setState({
+          current_energy: newEnergy,
+          current_energy_potions: this.state.current_energy_potions - 1
+        })
+      }
+    }
+      
+      setEnergy=(num)=>{
+      this.setState({
+        current_energy: this.state.current_energy + num
+      })
+    }
 
     displayAbout=()=>{
       
@@ -105,7 +163,6 @@ class App extends Component{
     }
 
     displayPlay=()=>{
-      
       this.setState({
         displayplay : !this.state.displayplay
     })
@@ -125,10 +182,10 @@ class App extends Component{
           displayabout={this.state.displayabout}
           displayplay={this.state.displayplay}
            />
-          
+
           :<> {this.state.loggedin
               ?
-              <>{this.getQuestions()}
+              <>
                 <div>
                   {this.state.newGame ?
                     <div>
@@ -137,10 +194,17 @@ class App extends Component{
                     </div>
                   :<>
                     <img id='background-image' src='./images/Trivia_Fighter.png'/>
-                    <CharacterSection character={this.state.selected_character} current_health={this.state.current_health}/>
-                    {this.state.current_health < 1 ?<DeathScreen/> 
+                    <CharacterSection character={this.state.selected_character} current_health={this.state.current_health} current_energy={this.state.current_energy} current_medkits={this.state.current_medkits} current_energy_potions={this.state.current_energy_potions} setFiftyFifty={this.setFiftyFifty} setAnswerReveal={this.setAnswerReveal} useMedKit={this.useMedKit} useEnergyPotion={this.useEnergyPotion}/>
+                    {this.state.current_health < 1 
+                    ?<>
+                      <DeathScreen/> 
+                      <div className= "game-over-buttons">
+                        <button className='ui green button'>New Game</button>
+                        <button className='ui red button'>Log Out</button>
+                      </div>
+                    </>
                     :
-                    <QuestionSection question_array={this.state.question_array} setEnemy={this.setEnemy} setQCount={this.setQCount} setWrongAnswers={this.setWrongAnswers}/>}
+                    <QuestionSection question_array={this.state.question_array} setEnemy={this.setEnemy} setQCount={this.setQCount} setWrongAnswers={this.setWrongAnswers} fifty_fifty={this.state.fifty_fifty} setFiftyFifty={this.setFiftyFifty} answer_reveal={this.state.answer_reveal} setAnswerReveal={this.setAnswerReveal}/>}
                     
                     <BattleSection enemy={enemies[this.state.eCount]} qCount={this.state.qCount}/>
                     {/* {this.state.reachedBoss ? <BossScreen/> : null} */}

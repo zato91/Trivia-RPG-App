@@ -6,7 +6,7 @@ function DeathScreen (props){
     
     return (
         <div className="death screen">
-           you dies
+           <Image src="./images/Game_Over.png" size="large" floated="left"/>
         </div>
     );
       

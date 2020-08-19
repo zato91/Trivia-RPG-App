@@ -4,7 +4,6 @@ import AnswerModal from './AnswerModal'
 
 function Question(props) {
   let correct_answer = props.correct_answer
-
   return (
       <div className="question">
         {props.question ?
@@ -14,10 +13,13 @@ function Question(props) {
           </div>
           <br></br>
           <div>
+
+
               <AnswerModal answer={props.answers[0]} correct_answer={correct_answer} getQuestion={props.getQuestion} setWrongAnswers={props.setWrongAnswers}/>
               <AnswerModal answer={props.answers[1]} correct_answer={correct_answer} getQuestion={props.getQuestion} setWrongAnswers={props.setWrongAnswers}/>
               <AnswerModal answer={props.answers[2]} correct_answer={correct_answer} getQuestion={props.getQuestion} setWrongAnswers={props.setWrongAnswers}/>
               <AnswerModal answer={props.answers[3]} correct_answer={correct_answer} getQuestion={props.getQuestion} setWrongAnswers={props.setWrongAnswers}/>
+
           </div>
         </div>
           : <p>loading</p>

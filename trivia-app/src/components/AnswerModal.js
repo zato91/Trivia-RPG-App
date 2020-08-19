@@ -22,7 +22,7 @@ function AnswerModel(props) {
         }}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<p>{props.answer.replace(/&#039;/g,"'").replace(/&quot;/g,"'")}</p>}
+      trigger={<p>{props.answer.replace(/&#039;/g,"'").replace(/&quot;/g,"'").replace(/&amp;/," & ")}</p>}
       >
       <Modal.Header>{header}</Modal.Header>
       <Modal.Content image>
@@ -52,7 +52,9 @@ function AnswerModel(props) {
           onClick={() => {
               setOpen(false)
               props.getQuestion()
-              props.setWrongAnswers()
+              if(damage){
+                props.setWrongAnswers()
+              }
           }}
           positive
         />

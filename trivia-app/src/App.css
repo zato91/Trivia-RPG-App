@@ -6,7 +6,6 @@
 }
 .splash-page{
   text-align: center;
-  /* overflow: hidden;  */
 }
 .splash-content{
   position: relative;
@@ -18,7 +17,6 @@
   background: rgba(240, 248, 255, 0.7);
   max-width: 50%;
 }
-
 .splash-content-description{
   text-align: justify;
   margin-right: 15px;
@@ -64,6 +62,8 @@
   position: relative;
   right: 180px;
   max-width: 20%;
+  min-width: 20%;
+  min-height: 100%;
 }
 .question-section{
   float: left;
@@ -72,6 +72,18 @@
   min-width: 33%;
   max-width: 33%;
   left: 0%;
+}
+.death-screen{
+  float: left;
+  position: relative;
+  text-align: center;
+  min-width: 33%;
+  max-width: 33%;
+}
+.game-over-buttons{
+  position: absolute;
+  top: 505px;
+  left: 43rem;
 }
 .battle-section{
   position: relative;

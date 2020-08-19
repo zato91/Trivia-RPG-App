@@ -8,7 +8,7 @@ import BattleSection from './components/BattleSection.js';
 import CharSelect from './components/CharSelect';
 import SplashPage from './components/SplashPage';
 import DeathScreen from './components/DeathScreen.js';
-import BossScreen from './components/BossScreen';
+
 
 
 const enemies = ["./images/Enemies/Banger_One.png","./images/Enemies/Banger_Two.png","./images/Enemies/Banger_Three.png","./images/Enemies/Cop_One.png","./images/Enemies/Cop_Two.png","./images/Enemies/Cop_Three.png","./images/Enemies/Hawk_One.png","./images/Enemies/Hawk_Three.png","./images/Enemies/Thug_One.png","./images/Enemies/Thug_Two.png","./images/Enemies/Thug_Three.png",]
@@ -27,16 +27,19 @@ class App extends Component{
       characters: [],
       selected_character: "",
       current_health: "",
-      current_energy:"",
+      current_energy: "",
+      current_armor: "",
       current_medkits: 1,
       current_energy_potions: 1,
       wrongAnswers: 0,
       fifty_fifty: false,
       answer_reveal: false,
       reachedBoss: false,
+      bossNumber:0,
       loggedin: false,
       displayabout:false,
-      displayplay :false
+      displayplay :false,
+      cheat: false
     } 
   }
 
@@ -68,19 +71,58 @@ class App extends Component{
         })
     })
 }
-    
-    setEnemy=()=>{
-      let count = Math.floor(Math.random() * enemies.length)
-      this.setState({
-        eCount: count
-      })
-    }
+  setCheat=()=>{
+    console.log('wekr')
+    this.setState({
+      cheat:true
+    })
+  } 
+
+  setEnemy=()=>{
+    let count = Math.floor(Math.random() * enemies.length)
+    this.setState({
+      eCount: count
+    })
+  }
     
     setQCount=()=>{
-      let count = (this.state.qCount + 1)
-      this.setState({
-        qCount: count
-      })
+      if (this.state.qCount === 3){
+        this.setState({
+          current_energy_potions: this.state.current_energy_potions + 1
+        })
+      }
+      
+      if (this.state.qCount === 6){
+        this.setState({
+          current_medkits: this.state.current_medkits + 1
+        })
+      }
+      if (this.state.qCount === 15){
+        this.setState({
+          current_medkits: this.state.current_medkits + 2,
+          current_energy_potions: this.state.current_energy_potions + 2
+        })
+      }
+
+      if(this.state.qCount<10){
+        let count = (this.state.qCount + 1)
+        this.setState({
+          qCount: count
+        })
+      }
+      else if (this.state.qCount<15) {
+        this.setState({
+          reachedBoss: true,
+          qCount: this.state.qCount +1
+        })
+      }
+      else {
+        this.setState({
+          reachedBoss: false,
+          qCount:1,
+          bossNumber: this.state.bossNumber + 1
+        })
+      }
     }
 
     startGame = (character) =>{
@@ -90,6 +132,7 @@ class App extends Component{
         selected_character: character,
         current_health: character.max_hp,
         current_energy: character.energy,
+        current_armor: character.armor
       })
     }
 
@@ -97,28 +140,35 @@ class App extends Component{
       let wrongAnswers = this.state.wrongAnswers + 1
       this.setState({
         wrongAnswers: wrongAnswers,
-        current_health: this.state.current_health - 2
+        current_health: this.state.current_health - (4 - (this.state.current_armor/5))
       })
     }
 
     setFiftyFifty=(ability)=>{
       let fifty_fifty = !this.state.fifty_fifty
-      if(this.state.current_energy>0){
+      if(this.state.current_energy>0 && ability ===true){
         this.setState({
           fifty_fifty: fifty_fifty,
         })
+        this.setEnergy(-1)
       }
-      if (ability === true) this.setEnergy(-1)
+      else this.setState({
+        fifty_fifty: false
+      })
+
     }
 
     setAnswerReveal=(ability)=>{
       let answer_reveal = !this.state.answer_reveal
-      if(this.state.current_energy > 2){
+      if(this.state.current_energy > 1 && ability === true){
         this.setState({
           answer_reveal: answer_reveal
         })
+        this.setEnergy(-2)
       }
-      if (ability === true) this.setEnergy(-2)
+      else this.setState({
+        answer_reveal: false
+      })
     }
 
     useMedKit=()=>{
@@ -149,6 +199,7 @@ class App extends Component{
     }
       
       setEnergy=(num)=>{
+      if (this.state.current_energy > 0)
       this.setState({
         current_energy: this.state.current_energy + num
       })
@@ -171,8 +222,7 @@ class App extends Component{
       return (
         <section className="App">
             <header className="App-header">
-              <Navbar
-              getCharacters={this.getCharacters}/> 
+              <Navbar getCharacters={this.getCharacters} setCheat={this.setCheat}/> 
             </header>
 
           {this.state.loading 
@@ -204,10 +254,9 @@ class App extends Component{
                       </div>
                     </>
                     :
-                    <QuestionSection question_array={this.state.question_array} setEnemy={this.setEnemy} setQCount={this.setQCount} setWrongAnswers={this.setWrongAnswers} fifty_fifty={this.state.fifty_fifty} setFiftyFifty={this.setFiftyFifty} answer_reveal={this.state.answer_reveal} setAnswerReveal={this.setAnswerReveal}/>}
+                    <QuestionSection question_array={this.state.question_array} setEnemy={this.setEnemy} setQCount={this.setQCount} setWrongAnswers={this.setWrongAnswers} fifty_fifty={this.state.fifty_fifty} setFiftyFifty={this.setFiftyFifty} answer_reveal={this.state.answer_reveal} setAnswerReveal={this.setAnswerReveal} reachedBoss={this.state.reachedBoss} cheat={this.state.cheat}/>}
                     
-                    <BattleSection enemy={enemies[this.state.eCount]} qCount={this.state.qCount}/>
-                    {/* {this.state.reachedBoss ? <BossScreen/> : null} */}
+                    <BattleSection enemy={enemies[this.state.eCount]} qCount={this.state.qCount} reachedBoss={this.state.reachedBoss} bossNumber={this.state.bossNumber}/>
                   </>
                   }
                 </div>

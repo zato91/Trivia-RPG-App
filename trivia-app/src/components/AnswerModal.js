@@ -22,7 +22,7 @@ function AnswerModel(props) {
         }}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<p>{props.answer.replace(/&#039;/g,"'").replace(/&quot;/g,"'").replace(/&amp;/," & ")}</p>}
+      trigger={<button className="ui black basic button">{props.answer.replace(/&#039;/g,"'").replace(/&quot;/g,"'").replace(/&amp;/," & ")}</button>}
       >
       <Modal.Header>{header}</Modal.Header>
       <Modal.Content image>
@@ -56,7 +56,7 @@ function AnswerModel(props) {
                 props.setWrongAnswers()
               }
           }}
-          positive
+          positive="true"
         />
       </Modal.Actions>
     </Modal>

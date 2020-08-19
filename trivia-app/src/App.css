@@ -24,6 +24,12 @@
 .game{
   overflow: hidden;
 }
+.info-section{
+  margin-bottom: 10px;
+}
+.question{
+  display: inline-block
+}
 .boss-button{
   position: relative;
 }

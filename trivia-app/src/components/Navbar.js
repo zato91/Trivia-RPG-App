@@ -14,7 +14,10 @@ let buttonDisplay = () =>{
   if (!localStorage.token){
     return <> <SignUpModal getCharacters={props.getCharacters}/> <LoginModal getCharacters={props.getCharacters}/> </>
   }else {
-    return <button onClick={logout} class="ui button" id="logout">Logout</button>
+    return<> 
+    <button onClick={logout} class="ui button" id="logout">Logout</button>
+    <button className="ui basic teal button" onClick={()=>props.setCheat()}>cheat</button>
+    </>
   }
 }
     return (
@@ -24,7 +27,6 @@ let buttonDisplay = () =>{
         <div className="signup-buttons">
           { 
         buttonDisplay()
-        
           }
         </div>
       </section>

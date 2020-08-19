@@ -13,12 +13,17 @@ function Question(props) {
           </div>
           <br></br>
           <div>
-
+            <Button.Group vertical>
 
               <AnswerModal answer={props.answers[0]} correct_answer={correct_answer} getQuestion={props.getQuestion} setWrongAnswers={props.setWrongAnswers}/>
+              <br></br>
               <AnswerModal answer={props.answers[1]} correct_answer={correct_answer} getQuestion={props.getQuestion} setWrongAnswers={props.setWrongAnswers}/>
+              <br></br>
               <AnswerModal answer={props.answers[2]} correct_answer={correct_answer} getQuestion={props.getQuestion} setWrongAnswers={props.setWrongAnswers}/>
+              <br></br>
               <AnswerModal answer={props.answers[3]} correct_answer={correct_answer} getQuestion={props.getQuestion} setWrongAnswers={props.setWrongAnswers}/>
+              <br></br>
+            </Button.Group>
 
           </div>
         </div>

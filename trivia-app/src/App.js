@@ -36,8 +36,7 @@ class App extends Component{
       answer_reveal: false,
       reachedBoss: false,
       loggedin: false,
-      displayabout:false,
-      displayplay :false
+      
     } 
   }
 
@@ -155,19 +154,7 @@ class App extends Component{
       })
     }
 
-    displayAbout=()=>{
-      
-      this.setState({
-        displayabout: !this.state.displayabout,
-        displayplay : false
-    })
-    }
-
-    displayPlay=()=>{
-      this.setState({
-        displayplay : !this.state.displayplay
-    })
-    }
+    
     render(){
       return (
         <BrowserRouter >
@@ -175,13 +162,9 @@ class App extends Component{
             <header className="App-header">
             <Route path="/" render={routerProps => <Navbar getCharacters={this.getCharacters} {...routerProps}  /> }/> 
             </header>
-
+            <Route  path="/" component={SplashPage} />
           {this.state.loading 
-          ?<SplashPage 
-          displayAbout={this.displayAbout} 
-          displayPlay={this.displayPlay}
-          displayabout={this.state.displayabout}
-          displayplay={this.state.displayplay}
+          ?<nill 
            />
 
           :<> {this.state.loggedin
@@ -214,7 +197,7 @@ class App extends Component{
                 </div>
               </>:
                 <div>
-                <SplashPage/>
+                
                </div>
             }
           </>

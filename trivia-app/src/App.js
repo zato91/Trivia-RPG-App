@@ -9,6 +9,7 @@ import CharSelect from './components/CharSelect';
 import SplashPage from './components/SplashPage';
 import DeathScreen from './components/DeathScreen.js';
 import BossScreen from './components/BossScreen';
+import {BrowserRouter, Route} from 'react-router-dom';
 
 
 const enemies = ["./images/Enemies/Banger_One.png","./images/Enemies/Banger_Two.png","./images/Enemies/Banger_Three.png","./images/Enemies/Cop_One.png","./images/Enemies/Cop_Two.png","./images/Enemies/Cop_Three.png","./images/Enemies/Hawk_One.png","./images/Enemies/Hawk_Three.png","./images/Enemies/Thug_One.png","./images/Enemies/Thug_Two.png","./images/Enemies/Thug_Three.png",]
@@ -169,10 +170,10 @@ class App extends Component{
     }
     render(){
       return (
+        <BrowserRouter >
         <section className="App">
             <header className="App-header">
-              <Navbar
-              getCharacters={this.getCharacters}/> 
+            <Route path="/" render={routerProps => <Navbar getCharacters={this.getCharacters} {...routerProps}  /> }/> 
             </header>
 
           {this.state.loading 
@@ -220,6 +221,7 @@ class App extends Component{
           }
           
         </section>
+        </BrowserRouter >
         );
       }
 }

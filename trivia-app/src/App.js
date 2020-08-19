@@ -46,7 +46,7 @@ class App extends Component{
     fetch(CHARURL,{
       method: "GET",
       headers: {
-        Authorization: `Bearer ${localStorage.token}` // send token back to server
+        Authorization: `Bearer ${localStorage.token}` 
       }
     })
     .then(res => res.json())
@@ -59,6 +59,24 @@ class App extends Component{
     })
 }
 
+
+reRender = () => {
+  fetch(CHARURL,{
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${localStorage.token}` 
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+      this.setState({
+        characters: data,
+        loading: false,
+        loggedin: true
+      })
+  })
+}
+
   componentDidMount() {
     fetch(TRIVIAURL)
     .then(res => res.json())
@@ -66,6 +84,9 @@ class App extends Component{
         this.setState({
           question_array: data.results,
         })
+        if(localStorage.token){
+          this.reRender()
+        }
     })
 }
     
@@ -154,17 +175,24 @@ class App extends Component{
       })
     }
 
+     startNewGame = () => {
+     
+       window.location.href = '/'; 
+    }
+
     
     render(){
       return (
         <BrowserRouter >
         <section className="App">
             <header className="App-header">
-            <Route path="/" render={routerProps => <Navbar getCharacters={this.getCharacters} {...routerProps}  /> }/> 
+            <Route path="/" render={routerProps => <Navbar getCharacters={this.getCharacters} 
+            startNewGame={this.startNewGame} 
+            {...routerProps}  /> }/> 
             </header>
-            <Route  path="/" component={SplashPage} />
+           
           {this.state.loading 
-          ?<nill 
+          ?<SplashPage
            />
 
           :<> {this.state.loggedin
@@ -202,7 +230,7 @@ class App extends Component{
             }
           </>
           }
-          
+          {/* <SplashPage/> */}
         </section>
         </BrowserRouter >
         );

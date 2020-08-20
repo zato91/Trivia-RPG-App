@@ -37,7 +37,6 @@ function QuestionSection (props) {
     
     return (
         <div className="question-section">
-        <InformationSection className="info-section" reachedBoss={props.reachedBoss}/>
         {Answers.length !== 0
         ?<div className="question">
             <h4>

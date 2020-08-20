@@ -6,6 +6,7 @@ function CharSelect (props){
     let characters = props.characters
     return (
         <div className="char-select">
+          <h1>Select Your character!</h1>
           <Image.Group size='small'>
             {/* <Image src={characters[0].img_url} /> */}
             <CharPopUp character={characters[0]} startGame={props.startGame}/>

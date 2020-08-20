@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 .App{
   overflow: hidden;
   background: aliceblue;
@@ -134,35 +136,63 @@
 
 .about {
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     width: 47em;
     height: 45em;
     max-width: 100%;
 }
 
-.shawn.zara{
-  width: 50%;
-  height: 30%;
-  
-}
-
-.shawn.zara img{
-  
-  width: 80%;
-  height: 100%;
-}
-
-.shawn.zara p{
-  
-  font-size: 19px;
-}
-
-
-.bio{
-  height: 45%;
-  width: 100%;
-}
 .ui.inverted.button{
   position: absolute;
-  left: 90%;
+  left: 95%;
+  font-size: 8px;
 }
+#dev-card {
+  margin-top: 0px;
+  width: 110em;
+  position: absolute;
+  /* position: relative; */
+  height: 630px;
+  background: url(/images/city.jpg) center;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 9px;
+}
+
+
+
+#dev-item {
+  /* background-color: blue; */
+  height: 49.5%;
+  border: 10px solid black;
+  
+}
+
+.imgdev{
+  width: 300px;
+  
+}
+#descri{
+  padding-bottom: 3px;
+  font-size: 14px; 
+  font: bold;
+}
+
+div.inline { float:left; 
+  padding-left: 16%;}
+
+#stars{
+  width: 95px;
+  display: inline;
+  margin-top: -6px;
+}
+
+#history{margin: 3.5% 3.5% 13px 0%;}
+
+#extra{font-size: 12px;
+  height: 6em;
+  color: indigo;}
+
+#link{color: red;
+  float: right;
+  font-size: 18px;
+  margin-top: 6px;}

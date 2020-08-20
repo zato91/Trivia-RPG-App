@@ -7,6 +7,12 @@
 .splash-page{
   text-align: center;
 }
+.breadcrumb{
+  position: absolute;
+  bottom: 0px;
+  left: 20px;
+  top: 700px;
+}
 .splash-content{
   position: relative;
   float: left;

@@ -46,7 +46,7 @@ function AnswerModel(props) {
         :null
           }
         <Button
-          content="Next Question"
+          content="Counter Attack!"
           labelPosition='right'
           icon='checkmark'
           onClick={() => {

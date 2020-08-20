@@ -25,8 +25,7 @@ const AboutDev = () => (
             <div><p>Coding skills: <Image src='/images/stars.jpg'  id="stars" /></p></div>
             <p id="history">History: </p>
         </Item.Description>
-        <div id="extra"><p>simply dummy text of the printing and typesetting industry.
-             Lorem Ipsum has been the industry's standard</p></div>
+        <div id="extra"><p>Shawn was born in Mississippi, but has lived many places since. He currently resides in the capital of the United States, Washingtong, DC.</p></div>
         </Item.Content>
     </Item>
 
@@ -48,8 +47,7 @@ const AboutDev = () => (
             <div><p>Coding skills: <Image src='/images/stars.jpg'  id="stars" /></p></div>
             <p id="history">History: </p>
         </Item.Description>
-        <div id="extra"><p>simply dummy text of the printing and typesetting industry.
-             Lorem Ipsum has been the industry's standard</p></div>
+        <div id="extra"><p>Zara is from France and moved to USA to clean up the city with the bad bugs.</p></div>
         </Item.Content>
     </Item>
     </Item.Group>
